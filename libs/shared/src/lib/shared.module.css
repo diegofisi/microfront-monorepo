@@ -1,0 +1,47 @@
+/* Estilo original */
+.container {
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Nuevo componente WelcomeCard */
+.welcome-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  margin: 20px 0;
+  max-width: 400px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.card-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-message {
+  font-size: 16px;
+  margin: 0 0 16px 0;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.card-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+}

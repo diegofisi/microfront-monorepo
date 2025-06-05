@@ -16,6 +16,12 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "paths": {
+      "catalog/Module": ["apps/catalog/src/remote-entry.ts"],
+      "profile/Module": ["apps/profile/src/remote-entry.ts"],
+      "@banco/shared": ["libs/shared/src/index.ts"]
+    },
+    "baseUrl": "."
   }
 }

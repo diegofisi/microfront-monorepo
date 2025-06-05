@@ -4,7 +4,16 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/first"
+      "path": "./apps/host"
+    },
+    {
+      "path": "./apps/catalog"
+    },
+    {
+      "path": "./apps/profile"
+    },
+    {
+      "path": "./libs/shared"
     }
   ]
 }

@@ -1,0 +1,35 @@
+{
+  "name": "host",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/host/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "options": {
+        "port": 4200
+      },
+      "dependsOn": ["typecheck"]
+    },
+    "build": {
+      "dependsOn": ["^build", "typecheck"]
+    },
+    "dev": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx build catalog --watch"
+          },
+          {
+            "command": "nx build profile --watch"
+          },
+          {
+            "command": "nx serve host"
+          }
+        ],
+        "parallel": true
+      }
+    }
+  }
+}
