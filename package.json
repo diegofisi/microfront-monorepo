@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nx run-many --targets=build --projects=catalog,profile --watch & nx serve host",
+    "dev": "nx run-many --target=serve --projects=catalog,profile,host --parallel --skip-nx-cache",
     "host": "nx serve host --skip-nx-cache"
   },
   "private": true,
