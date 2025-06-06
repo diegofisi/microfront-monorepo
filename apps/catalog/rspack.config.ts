@@ -13,6 +13,11 @@ export default {
     path: join(__dirname, 'dist'),
     publicPath: 'auto',
   },
+  resolve: {
+    alias: {
+      '@banco/shared': join(__dirname, '../../libs/shared/src/index.ts'),
+    },
+  },
   devServer: {
     port: 4201,
     headers: {

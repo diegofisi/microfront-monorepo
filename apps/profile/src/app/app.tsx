@@ -1,155 +1,118 @@
 import '../styles.css';
+import { useBankStore } from '@banco/shared';
+
+const styles = {
+  container: {
+    maxWidth: '1000px',
+    margin: '0 auto',
+    padding: '20px',
+    fontFamily: 'system-ui, -apple-system, sans-serif',
+  },
+  header: {
+    backgroundColor: '#6366f1',
+    color: 'white',
+    padding: '30px',
+    borderRadius: '12px',
+    marginBottom: '30px',
+    textAlign: 'center' as const,
+  },
+  title: {
+    fontSize: '28px',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+  },
+  subtitle: {
+    fontSize: '16px',
+    opacity: 0.9,
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '20px',
+    marginBottom: '30px',
+  },
+  card: {
+    backgroundColor: 'white',
+    padding: '25px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+    border: '1px solid #e5e7eb',
+  },
+  cardTitle: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: '15px',
+    borderBottom: '2px solid #f3f4f6',
+    paddingBottom: '8px',
+  },
+  infoRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '12px',
+    padding: '8px 0',
+  },
+  label: {
+    color: '#6b7280',
+    fontWeight: '500',
+  },
+  value: {
+    color: '#1f2937',
+    fontWeight: '600',
+  },
+  accountItem: {
+    backgroundColor: '#f8fafc',
+    padding: '15px',
+    borderRadius: '8px',
+    marginBottom: '12px',
+    border: '1px solid #e2e8f0',
+  },
+  accountType: {
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginBottom: '5px',
+  },
+  accountDetails: {
+    fontSize: '14px',
+    color: '#6b7280',
+  },
+  balance: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#059669',
+    marginTop: '8px',
+  },
+  productItem: {
+    backgroundColor: '#fef7ff',
+    padding: '15px',
+    borderRadius: '8px',
+    marginBottom: '12px',
+    border: '1px solid #f3e8ff',
+  },
+  productName: {
+    fontWeight: 'bold',
+    color: '#7c3aed',
+    marginBottom: '8px',
+  },
+  productDetails: {
+    fontSize: '14px',
+    color: '#6b7280',
+  },
+  badge: {
+    display: 'inline-block',
+    backgroundColor: '#fef3c7',
+    color: '#92400e',
+    padding: '4px 12px',
+    borderRadius: '12px',
+    fontSize: '12px',
+    fontWeight: 'bold',
+  },
+};
 
 export function App() {
-  const userProfile = {
-    personalInfo: {
-      fullName: 'Diego Giancarlo Vicuña Huamán',
-      email: 'diego.test@email.com',
-      phone: '+51 999 999 999',
-      dni: '12345678',
-      birthDate: '1985-03-15',
-      address: 'Av. Javier Prado 123, San Isidro, Lima',
-    },
-    bankingInfo: {
-      customerSince: '2018-06-15',
-      customerType: 'Premium',
-      creditScore: 750,
-      monthlyIncome: 8500,
-    },
-    accounts: [
-      {
-        type: 'Cuenta Corriente',
-        number: '****1234',
-        balance: 15750.5,
-        currency: 'PEN',
-      },
-      {
-        type: 'Cuenta de Ahorros',
-        number: '****5678',
-        balance: 2300.0,
-        currency: 'USD',
-      },
-      {
-        type: 'Cuenta CTS',
-        number: '****9012',
-        balance: 12400.0,
-        currency: 'PEN',
-      },
-    ],
-    products: [
-      { name: 'Tarjeta de Crédito Visa', limit: 25000, used: 3500 },
-      { name: 'Préstamo Personal', amount: 50000, remaining: 32000 },
-      { name: 'Seguro de Vida', coverage: 100000, premium: 120 },
-    ],
-  };
-
-  const styles = {
-    container: {
-      maxWidth: '1000px',
-      margin: '0 auto',
-      padding: '20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif',
-    },
-    header: {
-      backgroundColor: '#6366f1',
-      color: 'white',
-      padding: '30px',
-      borderRadius: '12px',
-      marginBottom: '30px',
-      textAlign: 'center' as const,
-    },
-    title: {
-      fontSize: '28px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
-    },
-    subtitle: {
-      fontSize: '16px',
-      opacity: 0.9,
-    },
-    grid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '20px',
-      marginBottom: '30px',
-    },
-    card: {
-      backgroundColor: 'white',
-      padding: '25px',
-      borderRadius: '12px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-      border: '1px solid #e5e7eb',
-    },
-    cardTitle: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      color: '#1f2937',
-      marginBottom: '15px',
-      borderBottom: '2px solid #f3f4f6',
-      paddingBottom: '8px',
-    },
-    infoRow: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '12px',
-      padding: '8px 0',
-    },
-    label: {
-      color: '#6b7280',
-      fontWeight: '500',
-    },
-    value: {
-      color: '#1f2937',
-      fontWeight: '600',
-    },
-    accountItem: {
-      backgroundColor: '#f8fafc',
-      padding: '15px',
-      borderRadius: '8px',
-      marginBottom: '12px',
-      border: '1px solid #e2e8f0',
-    },
-    accountType: {
-      fontWeight: 'bold',
-      color: '#1f2937',
-      marginBottom: '5px',
-    },
-    accountDetails: {
-      fontSize: '14px',
-      color: '#6b7280',
-    },
-    balance: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      color: '#059669',
-      marginTop: '8px',
-    },
-    productItem: {
-      backgroundColor: '#fef7ff',
-      padding: '15px',
-      borderRadius: '8px',
-      marginBottom: '12px',
-      border: '1px solid #f3e8ff',
-    },
-    productName: {
-      fontWeight: 'bold',
-      color: '#7c3aed',
-      marginBottom: '8px',
-    },
-    productDetails: {
-      fontSize: '14px',
-      color: '#6b7280',
-    },
-    badge: {
-      display: 'inline-block',
-      backgroundColor: '#fef3c7',
-      color: '#92400e',
-      padding: '4px 12px',
-      borderRadius: '12px',
-      fontSize: '12px',
-      fontWeight: 'bold',
-    },
-  };
+  const userProfile = useBankStore((state) => state.userProfile);
+  const accounts = useBankStore((state) => state.accounts);
+  const userProducts = useBankStore((state) => state.userProducts);
 
   return (
     <div style={styles.container}>
@@ -164,7 +127,6 @@ export function App() {
       </div>
 
       <div style={styles.grid}>
-        {/* Información Personal */}
         <div style={styles.card}>
           <h2 style={styles.cardTitle}>📋 Información Personal</h2>
           <div style={styles.infoRow}>
@@ -230,7 +192,7 @@ export function App() {
       {/* Cuentas */}
       <div style={styles.card}>
         <h2 style={styles.cardTitle}>💳 Mis Cuentas</h2>
-        {userProfile.accounts.map((account, index) => (
+        {accounts.map((account, index) => (
           <div key={index} style={styles.accountItem}>
             <div style={styles.accountType}>{account.type}</div>
             <div style={styles.accountDetails}>Número: {account.number}</div>
@@ -245,7 +207,7 @@ export function App() {
       {/* Productos */}
       <div style={styles.card}>
         <h2 style={styles.cardTitle}>🛍️ Mis Productos</h2>
-        {userProfile.products.map((product, index) => (
+        {userProducts.map((product, index) => (
           <div key={index} style={styles.productItem}>
             <div style={styles.productName}>{product.name}</div>
             <div style={styles.productDetails}>

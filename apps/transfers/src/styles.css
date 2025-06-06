@@ -1,4 +1,95 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* You can add global styles to this file, and also import other style files */
+
+/* Global Variables for Transfers Module */
+:root {
+  --transfers-primary: #7c3aed;
+  --transfers-primary-hover: #6d28d9;
+  --transfers-success: #059669;
+  --transfers-success-hover: #047857;
+  --transfers-warning: #d97706;
+  --transfers-error: #dc2626;
+  --transfers-gray-50: #f9fafb;
+  --transfers-gray-100: #f3f4f6;
+  --transfers-gray-200: #e5e7eb;
+  --transfers-gray-400: #9ca3af;
+  --transfers-gray-500: #6b7280;
+  --transfers-gray-600: #4b5563;
+  --transfers-gray-900: #1f2937;
+}
+
+/* Global Transfer Styles */
+.transfers-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.transfers-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--transfers-gray-200);
+  padding: 25px;
+}
+
+.transfers-button-primary {
+  background-color: var(--transfers-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.transfers-button-primary:hover {
+  background-color: var(--transfers-primary-hover);
+}
+
+.transfers-button-success {
+  background-color: var(--transfers-success);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.transfers-button-success:hover {
+  background-color: var(--transfers-success-hover);
+}
+
+.transfers-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--transfers-gray-200);
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.transfers-input:focus {
+  outline: none;
+  border-color: var(--transfers-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+/* Status badges */
+.status-completed {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.status-pending {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.status-failed {
+  background-color: #fecaca;
+  color: #dc2626;
+}

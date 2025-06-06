@@ -1,0 +1,74 @@
+/* ContactsList Styles */
+.contactsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.contactCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s;
+}
+
+.contactCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.contactHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.contactAvatar {
+  font-size: 32px;
+  margin-right: 15px;
+}
+
+.contactInfo {
+  flex: 1;
+}
+
+.contactName {
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 4px;
+}
+
+.contactBank {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.contactDetails {
+  margin-bottom: 15px;
+}
+
+.contactAccount {
+  font-size: 14px;
+  color: #4b5563;
+  background-color: #f9fafb;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.transferQuickButton {
+  width: 100%;
+  background-color: #059669;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.transferQuickButton:hover {
+  background-color: #047857;
+}

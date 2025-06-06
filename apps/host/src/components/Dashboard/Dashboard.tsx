@@ -1,36 +1,23 @@
 import { WelcomeCard } from '@banco/shared';
+import { useBankStore } from '@banco/shared';
 import styles from './dashboard.module.css';
 
 export const Dashboard = () => {
-  const user = {
-    name: 'Diego Vicuña',
-    accountNumber: '****1234',
-    balance: 15750.5,
-  };
+  const userProfile = useBankStore((state) => state.userProfile);
+  const accounts = useBankStore((state) => state.accounts);
+  const userProducts = useBankStore((state) => state.userProducts);
+  const recentTransactions = useBankStore((state) => state.recentTransactions);
 
-  const recentTransactions = [
-    {
-      id: 1,
-      description: 'Transferencia recibida',
-      amount: 500.0,
-      date: '2025-06-03',
-      type: 'credit',
-    },
-    {
-      id: 2,
-      description: 'Pago de servicios',
-      amount: -120.0,
-      date: '2025-06-02',
-      type: 'debit',
-    },
-    {
-      id: 3,
-      description: 'Depósito ATM',
-      amount: 300.0,
-      date: '2025-06-01',
-      type: 'credit',
-    },
-  ];
+  const primaryAccount = accounts.find(acc => acc.type === 'Cuenta Corriente');
+  const totalBalance = accounts
+    .filter(acc => acc.currency === 'PEN')
+    .reduce((sum, acc) => sum + acc.balance, 0);
+
+  const user = {
+    name: userProfile.personalInfo.fullName.split(' ')[0] + ' ' + userProfile.personalInfo.fullName.split(' ')[2],
+    accountNumber: primaryAccount?.number || '****0000',
+    balance: totalBalance,
+  };
 
   return (
     <div className={styles.container}>
@@ -54,30 +41,36 @@ export const Dashboard = () => {
         </div>
         <div className={styles.statCard}>
           <div className={styles.statTitle}>Productos Activos</div>
-          <div className={styles.statValue}>3</div>
+          <div className={styles.statValue}>{userProducts.length}</div>
         </div>
       </div>
 
       <div className={styles.transactionsSection}>
         <h2 className={styles.sectionTitle}>Movimientos Recientes</h2>
-        {recentTransactions.map((transaction) => (
-          <div key={transaction.id} className={styles.transaction}>
-            <div className={styles.transactionInfo}>
-              <div className={styles.transactionDesc}>
-                {transaction.description}
-              </div>
-              <div className={styles.transactionDate}>{transaction.date}</div>
-            </div>
-            <div
-              className={`${styles.transactionAmount} ${
-                transaction.type === 'credit' ? styles.credit : styles.debit
-              }`}
-            >
-              {transaction.type === 'credit' ? '+' : ''}S/{' '}
-              {Math.abs(transaction.amount).toLocaleString()}
-            </div>
+        {recentTransactions.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '20px', color: '#6b7280' }}>
+            No hay transacciones recientes
           </div>
-        ))}
+        ) : (
+          recentTransactions.map((transaction) => (
+            <div key={transaction.id} className={styles.transaction}>
+              <div className={styles.transactionInfo}>
+                <div className={styles.transactionDesc}>
+                  {transaction.description}
+                </div>
+                <div className={styles.transactionDate}>{transaction.date}</div>
+              </div>
+              <div
+                className={`${styles.transactionAmount} ${
+                  transaction.type === 'credit' ? styles.credit : styles.debit
+                }`}
+              >
+                {transaction.type === 'credit' ? '+' : ''}S/{' '}
+                {Math.abs(transaction.amount).toLocaleString()}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
