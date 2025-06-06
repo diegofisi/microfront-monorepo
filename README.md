@@ -1,4 +1,4 @@
-MicrofrontMonorepo
+Microfront Multirepo
 
 Para revisión del proyecto:
 
