@@ -1,82 +1,107 @@
 # MicrofrontMonorepo
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## Prerequisites
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+* Asegúrate de tener instalado [pnpm](https://pnpm.io/).
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Instalación y primeros pasos
 
-## Finish your remote caching setup
+1. Instala las dependencias:
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/aEQCdZnMPI)
+   ```sh
+   pnpm install
+   ```
 
+2. Para levantar el host en modo desarrollo o depuración:
 
-## Run tasks
+   ```sh
+   pnpm host
+   ```
 
-To run the dev server for your app, use:
+   Si prefieres un comando genérico para todos los proyectos en modo “watch”:
 
-```sh
-npx nx serve first
-```
+   ```sh
+   pnpm dev
+   ```
 
-To create a production bundle:
+3. Para crear un bundle de producción de un proyecto específico (por ejemplo, `first`):
 
-```sh
-npx nx build first
-```
+   ```sh
+   pnpm nx build first
+   ```
 
-To see all available targets to run for a project, run:
+4. Para ver los targets disponibles de un proyecto:
 
-```sh
-npx nx show project first
-```
+   ```sh
+   pnpm nx show project first
+   ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+## Cómo añadir nuevos remotos (Microfrontends)
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
+Para generar un nuevo remote en tu monorepo, ejecuta:
 
 ```sh
-npx nx g @nx/react:app demo
+pnpx nx g @nx/react:remote --host=host --name=example --directory=apps/example
 ```
 
-To generate a new library, use:
+* `--host=host`: indica el proyecto host (host principal en el que se consumirá el remote).
+* `--name=example`: nombre del nuevo remote.
+* `--directory=apps/example`: ubicación del proyecto dentro de `apps/`.
 
-```sh
-npx nx g @nx/react:lib mylib
+### Ajustes de TypeScript
+
+Después de generar el remote, actualiza manualmente estos archivos:
+
+1. **`tsconfig.base.json` (en la raíz del monorepo)**
+   Asegúrate de que incluyan las rutas necesarias para tu nuevo remote. Por ejemplo:
+
+   ```jsonc
+   {
+     "compilerOptions": {
+       // ...
+       "paths": {
+         "@app/example": ["apps/example/src/index.tsx"],
+         // otras rutas existentes...
+       }
+     }
+   }
+   ```
+
+2. **`tsconfig.json` (en la raíz del monorepo)**
+   Verifica que extienda del `tsconfig.base.json`. No suelen requerir cambios adicionales, salvo que uses referencias a proyectos recién creados.
+
+3. **`tsconfig.app.json` (en el host)**
+
+   * Asegúrate de que el `rootDir` y `outDir` apunten correctamente.
+   * Si tienes referencias a tu nuevo remote, agrégalas aquí (por ejemplo, en `"paths"` o en `"references"` si usas proyecto referenciado).
+
+4. **`tsconfig.json` (en el host)**
+   Este suele extender de `../../tsconfig.base.json`. Solo verifica que no haya rutas rotas al agregar el remote.
+
+## Configuración de Rspack para producción
+
+En `apps/host/rspack.config.prod.ts`, dentro de la sección de `remotes`, agrega tu nuevo remote con su URL de despliegue. Ejemplo:
+
+```ts
+export default {
+  // ...
+  remotes: [
+    ['catalog', 'http://localhost:4201/'],
+    ['profile', 'http://localhost:4202/'],
+    ['transfers', 'http://localhost:4203/'],
+    ['example', 'http://localhost:8888/'], // <-- tu nuevo remote
+  ],
+  // ...
+};
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+Asegúrate de ajustar los puertos y rutas según dónde despliegues cada microfrontend.
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
 
+Con estos pasos podrás:
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/react-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1. Cambiar a `pnpm` para instalar y correr todos los scripts.
+2. Generar nuevos remotos con el comando especificado.
+3. Mantener actualizados los archivos `tsconfig.*.json`.
+4. Configurar correctamente los remotos en `rspack.config.prod.ts`.
