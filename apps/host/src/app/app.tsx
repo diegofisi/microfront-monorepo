@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { WelcomeCard } from '../../../../libs/shared/src/lib/shared';
- 
+
+import { WelcomeCard } from '@banco/shared';
+
 const Profile = React.lazy(() => import('profile/Module'));
 const Catalog = React.lazy(() => import('catalog/Module'));
 
@@ -130,7 +130,7 @@ const Dashboard = () => {
   return (
     <div style={styles.container}>
       <WelcomeCard userName={user.name} />
-      
+
       <div style={styles.welcomeSection}>
         <h1 style={styles.title}>¡Bienvenido, {user.name}!</h1>
         <p style={styles.subtitle}>

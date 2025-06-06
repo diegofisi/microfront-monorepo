@@ -10,8 +10,11 @@ import { join } from 'path';
 import baseConfig from './module-federation.config';
 
 const prodConfig: ModuleFederationConfig = {
-  ...baseConfig,  
-  remotes: [['catalog', 'http://localhost:4201/']],
+  ...baseConfig,
+  remotes: [
+    ['catalog', 'http://localhost:4201/'],
+    ['profile', 'http://localhost:4202/'],
+  ],
 };
 
 export default {
