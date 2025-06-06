@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "nx run-many --target=serve --projects=catalog,profile,host --parallel --skip-nx-cache",
+    "dev": "nx run-many --target=serve --projects=catalog,profile,transfers,host --parallel --skip-nx-cache",
     "host": "nx serve host --skip-nx-cache"
   },
   "private": true,
@@ -26,6 +26,7 @@
     "@nx/jest": "21.1.2",
     "@nx/js": "21.1.2",
     "@nx/module-federation": "21.1.2",
+    "@nx/node": "^21.1.2",
     "@nx/react": "21.1.2",
     "@nx/rspack": "21.1.2",
     "@nx/vite": "21.1.2",

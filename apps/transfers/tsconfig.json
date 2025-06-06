@@ -3,18 +3,6 @@
   "include": [],
   "references": [
     {
-      "path": "../../libs/shared"
-    },
-    {
-      "path": "../catalog"
-    },
-    {
-      "path": "../profile"
-    },
-    {
-      "path": "../transfers"
-    },
-    {
       "path": "./tsconfig.app.json"
     },
     {

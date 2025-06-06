@@ -4,19 +4,9 @@ import {
   NxModuleFederationPlugin,
   NxModuleFederationDevServerPlugin,
 } from '@nx/module-federation/rspack';
-import { ModuleFederationConfig } from '@nx/module-federation';
 import { join } from 'path';
 
-import baseConfig from './module-federation.config';
-
-const prodConfig: ModuleFederationConfig = {
-  ...baseConfig,
-  remotes: [
-    ['catalog', 'http://localhost:4201/'],   
-    ['profile', 'http://localhost:4202/'],   
-    ['transfers', 'http://localhost:4203/'], 
-  ],
-};
+import config from './module-federation.config';
 
 export default {
   output: {
@@ -24,7 +14,10 @@ export default {
     publicPath: 'auto',
   },
   devServer: {
-    port: 4200,
+    port: 4203,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     historyApiFallback: {
       index: '/index.html',
       disableDotRule: true,
@@ -47,7 +40,7 @@ export default {
       // See: https://react-svgr.com/
       // svgr: false
     }),
-    new NxModuleFederationPlugin({ config: prodConfig }, { dts: false }),
-    new NxModuleFederationDevServerPlugin({ config: prodConfig }),
+    new NxModuleFederationPlugin({ config }, { dts: false }),
+    new NxModuleFederationDevServerPlugin({ config }),
   ],
 };

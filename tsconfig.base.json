@@ -18,9 +18,10 @@
     "target": "es2022",
     "customConditions": ["development"],
     "paths": {
+      "@banco/shared": ["libs/shared/src/index.ts"],
       "catalog/Module": ["apps/catalog/src/remote-entry.ts"],
       "profile/Module": ["apps/profile/src/remote-entry.ts"],
-      "@banco/shared": ["libs/shared/src/index.ts"],
+      "transfers/Module": ["apps/transfers/src/remote-entry.ts"]
     },
     "baseUrl": "."
   }
