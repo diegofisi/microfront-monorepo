@@ -15,7 +15,7 @@ Puntos a cubrir en la rúbrica:
 * **Comunicación** (#7): uso de contextos para compartir información entre microfronts
 * **Librerías** (#8): uso de librerías personalizadas en `libs/shared` para componente de bienvenida
 
-El resto de la rúbrica se estará tratando en otro proyecto que es \[[https://github.com/diegofisi/microfront-multirepo](https://github.com/diegofisi/microfront-multirepo)] y se esta cubriendo lo siguiente
+El resto de la rúbrica se estará tratando en otro proyecto que es \[https://github.com/diegofisi/microfront-multirepo](https://github.com/diegofisi/microfront-multirepo)] y se esta cubriendo lo siguiente
 * **Diseño conceptual** (#3): PoC Multirepo añadido Loan (para préstamos)
 * **PoC + Servicios** (#4): Loan está consumiendo su propio backend bff-loan
 * **Comunicación** (#7): se está usando Pub/Sub para la comunicación entre Loan y Host
