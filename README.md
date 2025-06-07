@@ -6,7 +6,7 @@ Microfront Multirepo
 
 Para revisión del proyecto:
 
-Puntos a cubrir en la rúbrica:
+Puntos a cubrir en la rúbrica en este monorepo:
 
 * **Diseño conceptual**: (#1) revisar la carpeta `binaries` y la imagen 
 * **PoC del monorepo** (#2) App de monorepo con Nx
