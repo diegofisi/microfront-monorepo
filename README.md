@@ -24,66 +24,116 @@ El resto de la rúbrica se estará tratando en otro proyecto que es \[[https://g
 * **Contenedores** (#9): se está dockerizando Loan y su backend asociado
 * **Otros** (#10) : Se esta usando el patron iFrame para un widget de noticias financieras
 
+# Microfront Monorepo - Guía de Uso
+
+## Instalación
+
+```bash
 pnpm install
-Para levantar el host en modo desarrollo o depuración:
+```
 
+## Levantar el Host en modo desarrollo o depuración
+
+```bash
 pnpm host
-Si prefieres un comando genérico para todos los proyectos en modo “watch”:
+```
 
+## Modo “watch” para todos los proyectos
+
+```bash
 pnpm dev
-Para crear un bundle de producción de un proyecto específico (por ejemplo, first):
+```
 
+## Crear bundle de producción para un proyecto específico (ej. `first`)
+
+```bash
 pnpm nx build first
-Para ver los targets disponibles de un proyecto:
+```
 
+## Ver los targets disponibles de un proyecto
+
+```bash
 pnpm nx show project first
-Cómo añadir nuevos remotos (Microfrontends)
-Para generar un nuevo remote en tu monorepo, ejecuta:
+```
 
+---
+
+# Cómo añadir nuevos remotos (Microfrontends)
+
+Ejecuta el siguiente comando para generar un nuevo remote:
+
+```bash
 pnpx nx g @nx/react:remote --host=host --name=example --directory=apps/example
---host=host: indica el proyecto host (host principal en el que se consumirá el remote).
---name=example: nombre del nuevo remote.
---directory=apps/example: ubicación del proyecto dentro de apps/.
-Ajustes de TypeScript
-Después de generar el remote, actualiza manualmente estos archivos:
+```
 
-tsconfig.base.json (en la raíz del monorepo) Asegúrate de que incluyan las rutas necesarias para tu nuevo remote. Por ejemplo:
+* `--host=host`: indica el proyecto host (donde se consumirá el remote).
+* `--name=example`: nombre del nuevo remote.
+* `--directory=apps/example`: ubicación del proyecto dentro de `apps/`.
 
+---
+
+# Ajustes de TypeScript
+
+## `tsconfig.base.json` (raíz del monorepo)
+
+Agrega las rutas necesarias:
+
+```json
 {
   "compilerOptions": {
-    // ...
     "paths": {
-      "@app/example": ["apps/example/src/index.tsx"],
-      // otras rutas existentes...
+      "@app/example": ["apps/example/src/index.tsx"]
     }
   }
 }
-tsconfig.json (en la raíz del monorepo) Verifica que extienda del tsconfig.base.json. No suelen requerir cambios adicionales, salvo que uses referencias a proyectos recién creados.
+```
 
-tsconfig.app.json (en el host)
+## `tsconfig.json` (raíz del monorepo)
 
-Asegúrate de que el rootDir y outDir apunten correctamente.
-Si tienes referencias a tu nuevo remote, agrégalas aquí (por ejemplo, en "paths" o en "references" si usas proyecto referenciado).
-tsconfig.json (en el host) Este suele extender de ../../tsconfig.base.json. Solo verifica que no haya rutas rotas al agregar el remote.
+Debe extender de `tsconfig.base.json`.
 
-Configuración de Rspack para producción
-En apps/host/rspack.config.prod.ts, dentro de la sección de remotes, agrega tu nuevo remote con su URL de despliegue. Ejemplo:
+## `tsconfig.app.json` (en el host)
 
+* Verifica que `rootDir` y `outDir` estén bien configurados.
+* Agrega referencias si es necesario.
+
+## `tsconfig.json` (en el host)
+
+* Debe extender de `../../tsconfig.base.json`.
+* Revisa que no existan rutas rotas al agregar el nuevo remote.
+
+---
+
+# Configuración de Rspack para producción
+
+Edita `apps/host/rspack.config.prod.ts` y agrega tu nuevo remote:
+
+```ts
 export default {
-  // ...
   remotes: [
     ['catalog', 'http://localhost:4201/'],
     ['profile', 'http://localhost:4202/'],
     ['transfers', 'http://localhost:4203/'],
     ['example', 'http://localhost:8888/'], // <-- tu nuevo remote
   ],
-  // ...
 };
-Asegúrate de ajustar los puertos y rutas según dónde despliegues cada microfrontend.
+```
 
-Con estos pasos podrás:
+> Ajusta puertos y rutas según el entorno de despliegue.
 
-Cambiar a pnpm para instalar y correr todos los scripts.
-Generar nuevos remotos con el comando especificado.
-Mantener actualizados los archivos tsconfig.*.json.
-Configurar correctamente los remotos en rspack.config.prod.ts.
+---
+
+# Con estos pasos podrás:
+
+* Instalar y ejecutar scripts usando `pnpm`.
+* Generar nuevos microfrontends remotos.
+* Mantener la configuración de TypeScript actualizada.
+* Declarar remotos correctamente en `rspack.config.prod.ts`.
+
+
+# Asegurarse lo siguiente:
+
+* Cambiar a pnpm para instalar y correr todos los scripts.
+* Generar nuevos remotos con el comando especificado.
+* Mantener actualizados los archivos tsconfig.*.json.
+* Configurar correctamente los remotos en rspack.config.prod.ts.
