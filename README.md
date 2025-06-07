@@ -38,16 +38,10 @@ pnpm install
 pnpm host
 ```
 
-## Modo “watch” para todos los proyectos
+## Modo “watch o dev” para todos los proyectos
 
 ```bash
 pnpm dev
-```
-
-## Crear bundle de producción para un proyecto específico (ej. `first`)
-
-```bash
-pnpm nx build first
 ```
 
 ## Ver los targets disponibles de un proyecto
