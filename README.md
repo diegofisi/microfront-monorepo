@@ -127,7 +127,6 @@ export default {
 
 # Asegurarse lo siguiente:
 
-* Cambiar a pnpm para instalar y correr todos los scripts.
 * Generar nuevos remotos con el comando especificado.
 * Mantener actualizados los archivos tsconfig.*.json.
 * Configurar correctamente los remotos en rspack.config.prod.ts.
