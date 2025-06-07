@@ -16,11 +16,11 @@ Puntos a cubrir en la rúbrica:
 * **Librerías** (#8): uso de librerías personalizadas en `libs/shared` para componente de bienvenida
 
 El resto de la rúbrica se estará tratando en otro proyecto que es \[[enlace](https://github.com/diegofisi/microfront-multirepo)] y se esta cubriendo lo siguiente
-Diseño conceptual (#3): PoC Multirepo añadido Loan (para préstamos)
-PoC + Servicios (#4): Loan está consumiendo su propio backend bff-loan
-Comunicación (#7): se está usando Pub/Sub para la comunicación entre Loan y Host
-Contenedores (#9): se está dockerizando Loan y su backend asociado
-Otros (#10) : Se esta usando el patron iFrame para un widget de noticias financieras
+* **Diseño conceptual** (#3): PoC Multirepo añadido Loan (para préstamos)
+* **PoC + Servicios** (#4): Loan está consumiendo su propio backend bff-loan
+* **Comunicación** (#7): se está usando Pub/Sub para la comunicación entre Loan y Host
+* **Contenedores** (#9): se está dockerizando Loan y su backend asociado
+* **Otros** (#10) : Se esta usando el patron iFrame para un widget de noticias financieras
 
 ## Prerequisites
 
